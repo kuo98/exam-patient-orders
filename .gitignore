@@ -1,0 +1,24 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# IDE folders
+.vs/
+.idea/
+
+# Generated files
+TestResult*/
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+
+# Secrets/config
+appsettings.*.local.json
