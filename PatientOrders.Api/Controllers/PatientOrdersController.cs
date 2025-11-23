@@ -17,6 +17,7 @@ public class PatientOrdersController : ControllerBase
     }
 
     [HttpGet("GetPatientOrders")]
+    [ProducesResponseType(typeof(List<PatientOrder>), 200)]
     public async Task<List<PatientOrder>> GetPatientOrders()
     {
         var patientOrders = await _patientOrderService.GetPatientOrders();
@@ -24,6 +25,7 @@ public class PatientOrdersController : ControllerBase
     }
 
     [HttpPost("CreateOrder")]
+    [ProducesResponseType(200)]
     public async Task<IActionResult> CreateOrder([FromBody] CreateOrderReqDto createOrderReqDto)
     {
         await _patientOrderService.CreateNewOrder(new Order
@@ -35,6 +37,7 @@ public class PatientOrdersController : ControllerBase
     }
     
     [HttpPost("CreatePatient")]
+    [ProducesResponseType(200)]
     public async Task<IActionResult> CreatePatient([FromBody] CreatePatientReqDto createPatientReqDto)
     {
         await _patientOrderService.CreateNewPatient(new Patient
