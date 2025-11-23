@@ -1,10 +1,7 @@
 using System.Net.Mime;
 using System.Text.Json;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using PatientOrders.Api;
 
-namespace PatientOrders.Api.Middleware;
+namespace PatientOrders.Api;
 
 public class ExceptionHandlingMiddleware
 {

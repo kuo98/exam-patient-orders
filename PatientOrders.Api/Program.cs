@@ -1,9 +1,9 @@
 using System.Data;
 using System.Text.Json.Serialization;
 using Npgsql;
+using PatientOrders.Api;
 using PatientOrders.Api.Repos;
 using PatientOrders.Api.Services;
-using PatientOrders.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

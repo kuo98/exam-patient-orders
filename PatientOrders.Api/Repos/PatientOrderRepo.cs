@@ -1,7 +1,5 @@
 using System.Data;
 using Dapper;
-using PatientOrders.Api.Entities;
-using PatientOrders.Api.Mappers;
 using PatientOrders.Api.Models;
 
 namespace PatientOrders.Api.Repos;
@@ -23,11 +21,11 @@ public class PatientOrderRepo : IPatientOrderRepo
 
     private const string SelectPatientSql = """
                                             SELECT  
-                                                id AS Id,
-                                                name AS Name
+                                                id AS PatientId,
+                                                name AS PatientName
                                             FROM patients
                                             """;
-    
+
     private const string SelectPatientOrdersSql = """
                                                   SELECT 
                                                       p.id AS PatientId,
@@ -37,7 +35,7 @@ public class PatientOrderRepo : IPatientOrderRepo
                                                   FROM patients p
                                                   LEFT JOIN orders o ON p.id = o.patient_id
                                                   """;
-    
+
     public PatientOrderRepo(IDbConnection dbConnection)
     {
         _dbConnection = dbConnection;
@@ -56,12 +54,12 @@ public class PatientOrderRepo : IPatientOrderRepo
 
     public async Task InsertOrder(Order order)
     {
-        await _dbConnection.ExecuteAsync(InsertOrderSql, new { Message = order.OrderMessage, PatientId = order.PatientId });
+        await _dbConnection.ExecuteAsync(InsertOrderSql, new { Message = order.OrderMessage, order.PatientId });
     }
 
     public async Task<List<Patient>> GetPatients()
     {
-        var patientEntities = await _dbConnection.QueryAsync<PatientEntity>(SelectPatientSql);
-        return patientEntities.Select(x => x.ToDomain()).ToList();
+        var patients = await _dbConnection.QueryAsync<Patient>(SelectPatientSql);
+        return patients.ToList();
     }
 }
